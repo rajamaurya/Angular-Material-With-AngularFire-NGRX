@@ -1,0 +1,28 @@
+<section *ngIf = "!isSignedUp">
+    <form fxLayout="column" fxLayoutGap="12px" fxLayoutAlign="center center" #f="ngForm" (ngSubmit) = "onSubmit(f)">
+        <mat-form-field>
+            <input type="email"
+             matInput placeholder="Your email.." 
+             ngModel 
+             name="email"
+             required
+             #in="ngModel">
+             <mat-error *ngIf = "in.hasError('required')">Email is invalid.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" matInput placeholder="Your password.." autocomplete="autocomplete" 
+            ngModel 
+            name="password" 
+            required
+            minlength="6"
+            #psl="ngModel">
+          <mat-hint align = "end">{{psl.value?.length}}/6</mat-hint> 
+          <mat-error *ngIf = "psl.hasError('required')">Password is invalid.</mat-error>
+  
+        </mat-form-field>
+        <mat-checkbox name="agree" ngModel color="primary" required>Agree terms & Conditions</mat-checkbox>
+        <button mat-raised-button color="primary" [disabled] = "f.invalid"> Submit </button>
+    </form>
+</section>
+<app-training *ngIf = "isSignedUp"></app-training>
+
